@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import {Button, Form, Input} from "antd";
 const layout = {
     labelCol: {
@@ -9,15 +9,15 @@ const layout = {
     },
 };
 const UpdateForm =(props)=>{
-    const form =Form.useForm()
+
+
     useEffect(()=>{
     fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`)
         .then((response) => response.json())
-        .then((json) => form.setFieldsValue({
-            title: props.title,
-            body: props.body,
-        }));
-},[])
+        .then((json) => console.log(json,"json") );
+
+
+    },[])
 
     const onCreateDemo = (values)=>{
         console.log(values,"values")
@@ -36,9 +36,9 @@ const UpdateForm =(props)=>{
             .then((json) => props.setEditionModal(false));
     }
     return (
-        <Form  {...layout} name="nest-messages" onFinish={onCreateDemo} form ={form} >
+        <Form  {...layout} name="nest-messages" onFinish={onCreateDemo} >
             <Form.Item
-                name={['demo', 'userId']}
+                name={[ 'userId']}
                 label=""
                 hidden={true}
 
@@ -46,8 +46,8 @@ const UpdateForm =(props)=>{
                 <Input value ={1} hidden/>
             </Form.Item>
             <Form.Item
-                name={['demo', 'title']}
-                label="title"
+                name={['title']}
+                label="Title"
                 rules={[
                     {
                         required: true,
@@ -55,11 +55,11 @@ const UpdateForm =(props)=>{
                     },
                 ]}
             >
-                <Input />
+                <Input onChange = {(e)=>props.setEnteredTitle(e.target.value)} defaultValue={props.title} />
             </Form.Item>
 
-            <Form.Item name={['demo', 'body']} label="Description">
-                <Input.TextArea />
+            <Form.Item name={['body']} label="Description">
+                <Input.TextArea  onChange = {(e)=>props.setEnteredBody(e.target.value)}defaultValue={props.body}/>
             </Form.Item>
             <Form.Item
                 wrapperCol={{

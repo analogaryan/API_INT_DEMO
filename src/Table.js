@@ -5,6 +5,8 @@ import CreateForm from "./CreateForm";
 import UpdateForm from "./UpdateForm";
 const Table = ()=>{
     const [tableData,setTableData]=useState([])
+    const [enteredtitle,setEnteredTitle]=useState("")
+    const [enteredBody,setEnteredBody]=useState("")
     const [toggleModel,setToggleModel]=useState(false)
     const [editionModal,setEditionModal]=useState({booleanVal :false ,did : "",title:"",body:"" })
     useEffect(()=>{
@@ -39,7 +41,7 @@ const Table = ()=>{
             <Modal title="Update" open={editionModal.booleanVal}  onOk={()=>setEditionModal(false)} onCancel={()=>setEditionModal(false)}footer={
                 null
             }>
-                <UpdateForm id={editionModal.did}  setEditionModal={setEditionModal} body={editionModal.body} title={editionModal.title}/>
+                <UpdateForm setEnteredBody={setEnteredBody}  setEnteredTitle = {setEnteredTitle} id={editionModal.did}  setEditionModal={setEditionModal} body={enteredBody} title={enteredtitle}/>
             </Modal>
             <Button style={{alignItems :"right"}} onClick={()=>setToggleModel(true)}>new</Button>
     <table id="table_design">
