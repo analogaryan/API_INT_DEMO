@@ -5,7 +5,6 @@ import CreateForm from "./CreateForm";
 const Table = ()=>{
     const [tableData,setTableData]=useState([])
     const [toggleModel,setToggleModel]=useState(false)
-    console.log(tableData,"tableData")
     useEffect(()=>{
         var requestOptions = {
             method: 'GET',
@@ -26,13 +25,18 @@ const Table = ()=>{
     const truncateValue=(string,newString)=>{
         return string?.length > newString ? string.substr(0,newString-1) + "..." :string
     }
+    const onDeletionDemo = (id)=>{
+        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+            method: 'DELETE',
+        });
+    }
 
     return (
         <Fragment>
             <Modal title="Basic Modal" open={toggleModel} onOk={handleOk} onCancel={handleCancel} footer={
                 null
             }>
-               <CreateForm/>
+               <CreateForm setToggleModel={setToggleModel}/>
             </Modal>
             <Button style={{alignItems :"right"}} onClick={()=>setToggleModel(true)}>new</Button>
     <table id="table_design">
@@ -40,17 +44,19 @@ const Table = ()=>{
             <th>Id</th>
             <th>Title</th>
             <th>Body</th>
+            <th>Actions</th>
+
         </tr>
-            {tableData.map((item)=>{
-            return    <tr>
+            {tableData.map((item,index)=>{
+            return    <tr key={index}>
                     <td>{item.id}</td>
-                    <td>{
-                        truncateValue(item.title,20)}</td>
+                    <td>{truncateValue(item.title,20)}</td>
                     <td>{truncateValue(item.body,20) }</td>
-                </tr>
+                <td><Button >Update</Button> <Button type={"primary"} onClick={()=>onDeletionDemo(item.id)}>Delete</Button></td>
+
+            </tr>
             })}
-
-
-    </table></Fragment>)
+    </table>
+        </Fragment>)
 }
 export default Table;
