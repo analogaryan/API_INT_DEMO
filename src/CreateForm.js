@@ -9,6 +9,7 @@ const layout = {
     },
 };
 const CreateForm =(props)=>{
+
     const onCreateDemo = (values)=>{
         console.log(values,"values")
         fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -58,7 +59,7 @@ const CreateForm =(props)=>{
               }}
           >
               <Button type="primary" htmlType="submit">
-                  Submit
+                  Save
               </Button>
           </Form.Item>
   </Form>  )

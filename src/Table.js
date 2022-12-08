@@ -6,7 +6,7 @@ import UpdateForm from "./UpdateForm";
 const Table = ()=>{
     const [tableData,setTableData]=useState([])
     const [toggleModel,setToggleModel]=useState(false)
-    const [editionModal,setEditionModal]=useState({booleanVal :false ,did : "" })
+    const [editionModal,setEditionModal]=useState({booleanVal :false ,did : "",title:"",body:"" })
     useEffect(()=>{
         var requestOptions = {
             method: 'GET',
@@ -28,17 +28,18 @@ const Table = ()=>{
         });
     }
 
+
     return (
         <Fragment>
-            <Modal title="Basic Modal" open={toggleModel}  footer={
+            <Modal title="Create"  onOk={()=>setToggleModel(false)} onCancel={()=>setToggleModel(false)} open={toggleModel}  footer={
                 null
             }>
                <CreateForm setToggleModel={setToggleModel}/>
             </Modal>
-            <Modal title="Basic Modal" open={editionModal} footer={
+            <Modal title="Update" open={editionModal.booleanVal}  onOk={()=>setEditionModal(false)} onCancel={()=>setEditionModal(false)}footer={
                 null
             }>
-                <UpdateForm setEditionModal={setEditionModal}/>
+                <UpdateForm id={editionModal.did}  setEditionModal={setEditionModal} body={editionModal.body} title={editionModal.title}/>
             </Modal>
             <Button style={{alignItems :"right"}} onClick={()=>setToggleModel(true)}>new</Button>
     <table id="table_design">
@@ -54,7 +55,7 @@ const Table = ()=>{
                     <td>{item.id}</td>
                     <td>{truncateValue(item.title,20)}</td>
                     <td>{truncateValue(item.body,20) }</td>
-                <td><Button onClick={()=>    setEditionModal({booleanVal :true,did : item.id })
+                <td><Button onClick={()=>    setEditionModal({booleanVal :true, did : item.id ,body: item.body,title: item.title})
                 }>Update</Button> <Button type={"primary"} onClick={()=>onDeletionDemo(item.id)}>Delete</Button></td>
 
 

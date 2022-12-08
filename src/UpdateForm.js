@@ -9,11 +9,15 @@ const layout = {
     },
 };
 const UpdateForm =(props)=>{
+    const form =Form.useForm()
     useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/posts/1')
+    fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`)
         .then((response) => response.json())
-        .then((json) => console.log(json));
-})
+        .then((json) => form.setFieldsValue({
+            title: props.title,
+            body: props.body,
+        }));
+},[])
 
     const onCreateDemo = (values)=>{
         console.log(values,"values")
@@ -32,10 +36,10 @@ const UpdateForm =(props)=>{
             .then((json) => props.setEditionModal(false));
     }
     return (
-        <Form  {...layout} name="nest-messages" onFinish={onCreateDemo} >
+        <Form  {...layout} name="nest-messages" onFinish={onCreateDemo} form ={form} >
             <Form.Item
                 name={['demo', 'userId']}
-                label="title"
+                label=""
                 hidden={true}
 
             >
@@ -64,7 +68,7 @@ const UpdateForm =(props)=>{
                 }}
             >
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    Update
                 </Button>
             </Form.Item>
         </Form>  )
