@@ -1,7 +1,7 @@
 import React, {Fragment,useRef, useEffect, useState} from "react"
 import "./table.css"
 import {Button, Modal} from 'antd';
-import Drawer from "./Drawer";
+import DrawerView from "./Drawer";
 import CreateForm from "./CreateForm";
 import UpdateForm from "./UpdateForm";
 const Table = ()=>{
@@ -61,7 +61,7 @@ const Table = ()=>{
 
     return (
         <Fragment>
-            <Drawer setShowDrawer = {setShowDrawer} showDrawer = {showDrawer} viewData = {viewData}/>
+            <DrawerView setShowDrawer = {setShowDrawer} showDrawer = {showDrawer} viewData = {viewData}/>
             <Modal modalProps = {{destroyOnClose:true}}title="Create"  onOk={()=>setToggleModel(false)} onCancel={()=>setToggleModel(false)} open={toggleModel}  footer={
                 null
             }>
@@ -91,16 +91,16 @@ const Table = ()=>{
                     <td>{item.id}</td>
                     <td><a onClick={()=>setShowDrawer(true)}>{truncateValue(item.title,20)}</a></td>
                     <td>{truncateValue(item.body,20) }</td>
-                <td><Button onClick={()=>
+                <td><Button  style={{marginLeft:"10px"}} onClick={()=>
                 {
                     setEditionModal({booleanVal :true, did : item.id ,body: item.body,title: item.title}) ;
                     setEnteredTitle(item.title);
                     setEnteredBody(item.body);
                 }
                 }
-                >Update</Button> <Button type={"primary"} onClick={()=>onDeletionDemo(item.id)}>Delete</Button> <Button type={"primary"} onClick={()=>setViewData(item)}>view</Button></td>
-
-
+                >Update</Button>
+                    <Button style={{marginLeft:"10px"}} onClick={()=>onDeletionDemo(item.id)}>Delete</Button>
+                    <Button  style={{marginLeft:"10px"}} type="primary" onClick={()=>{setViewData(item);setShowDrawer(true)}}>view</Button></td>
 
             </tr>
             })}

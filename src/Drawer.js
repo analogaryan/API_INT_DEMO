@@ -1,11 +1,12 @@
+import React from "react"
+import {Drawer} from 'antd';
 
-
-const Drawer = (props) => {
+const DrawerView = (props) => {
     const onClose = () => {
         props.setShowDrawer(false);
     };
    return   <Drawer
-       title="Drawer with extra actions"
+       header={false}
        placement={"left"}
        width={500}
        onClose={onClose}
@@ -13,10 +14,10 @@ const Drawer = (props) => {
 
    >
 
-       <p>Some contents...</p>
-       <p>Some contents...</p>
-       <p>Some contents...</p>
+       <p>{props.viewData.id}</p>
+       <p>{props.viewData.title}</p>
+       <p>{props.viewData.body}</p>
    </Drawer>
 
 }
-export default Drawer
+export default DrawerView
