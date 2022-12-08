@@ -11,10 +11,14 @@ const layout = {
 const UpdateForm =(props)=>{
     const [enteredtitle,setEnteredTitle]=useState("")
     const [enteredBody,setEnteredBody]=useState("")
+    console.log(enteredBody,"enteredBody")
     useEffect(()=>{
         fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`)
             .then((response) => response.json())
-            .then((json) => {setEnteredTitle(json.title);setEnteredBody(json.body);});
+            .then((json) => {
+                setEnteredTitle(json.title);
+                setEnteredBody(json.body);
+            });
 
 
     },[props.id])
@@ -36,40 +40,20 @@ const UpdateForm =(props)=>{
             .then((json) => props.setEditionModal(false));
     }
     return (
-        <Form  {...layout} name="nest-messages" onFinish={onUpdateDemo} >
-            <Form.Item
-                name={[ 'userId']}
-                label=""
-                hidden={true}
-            >
-                <input type="hidden" />
-            </Form.Item>
-            <Form.Item
-                name={['title']}
-                label="Title"
-                rules={[
-                    {
-                        required: true,
-                        message : "please enter title"
-                    },
-                ]}
-            >
-                <input type="text" onChange={(e) =>setEnteredTitle(e.target.value)} value={enteredtitle}/>
-            </Form.Item>
 
-            <Form.Item name={['body']} label="Description">
-                <input type="textarea" onChange={(e) =>setEnteredBody(e.target.value)} value={enteredBody}/>
-            </Form.Item>
-            <Form.Item
-                wrapperCol={{
-                    ...layout.wrapperCol,
-                    offset: 8,
-                }}
-            >
-                <Button type="primary" htmlType="submit">
-                    Update
-                </Button>
-            </Form.Item>
-        </Form>  )
+        <form onFinish={onUpdateDemo}>
+            <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Email address</label>
+                <input type="text" className="form-control" onChange={(e) =>setEnteredTitle(e.target.value)} defaultValue={enteredtitle}/>
+
+            </div>
+            <div className="form-group">
+                <label htmlFor="exampleInputPassword1">Password</label>
+                <input type="textarea" className="form-control" rows={5} onChange={(e) =>setEnteredBody(e.target.value)} defaultValue={enteredBody}/>
+            </div>
+
+            <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+    )
 }
 export default UpdateForm;

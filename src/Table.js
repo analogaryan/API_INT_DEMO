@@ -9,7 +9,7 @@ const Table = ()=>{
     const [tableData,setTableData]=useState([])
     const [enteredtitle,setEnteredTitle]=useState("")
     const [enteredBody,setEnteredBody]=useState("")
-    console.log(enteredBody,"enteredBody")
+
 
     const [toggleModel,setToggleModel]=useState(false)
     const [editionModal,setEditionModal]=useState({booleanVal :false ,did : "",title:"",body:"" })
