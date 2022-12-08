@@ -9,9 +9,12 @@ const Table = ()=>{
     const [tableData,setTableData]=useState([])
     const [enteredtitle,setEnteredTitle]=useState("")
     const [enteredBody,setEnteredBody]=useState("")
+    console.log(enteredBody,"enteredBody")
 
     const [toggleModel,setToggleModel]=useState(false)
     const [editionModal,setEditionModal]=useState({booleanVal :false ,did : "",title:"",body:"" })
+
+
     useEffect(()=>{
         var requestOptions = {
             method: 'GET',
@@ -88,8 +91,10 @@ const Table = ()=>{
                 {
                     setEditionModal({booleanVal :true, did : item.id ,body: item.body,title: item.title}) ;
                     setEnteredTitle(item.title);
-                    setEnteredBody(item.body)}
-                }>Update</Button> <Button type={"primary"} onClick={()=>onDeletionDemo(item.id)}>Delete</Button></td>
+                    setEnteredBody(item.body);
+                }
+                }
+                >Update</Button> <Button type={"primary"} onClick={()=>onDeletionDemo(item.id)}>Delete</Button></td>
 
 
 

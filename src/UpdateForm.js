@@ -9,18 +9,15 @@ const layout = {
     },
 };
 const UpdateForm =(props)=>{
-
-    const [form] = Form.useForm();
+    const [enteredtitle,setEnteredTitle]=useState("")
+    const [enteredBody,setEnteredBody]=useState("")
     useEffect(()=>{
-    fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`)
-        .then((response) => response.json())
-        .then((json) => form.getFieldsValue({
-            body: json.body,
-            title: json.title,
-        }) );
+        fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`)
+            .then((response) => response.json())
+            .then((json) => {setEnteredTitle(json.title);setEnteredBody(json.body);});
 
 
-    },[])
+    },[props.id])
 
     const onUpdateDemo = (values)=>{
         console.log(values,"values")
@@ -39,13 +36,13 @@ const UpdateForm =(props)=>{
             .then((json) => props.setEditionModal(false));
     }
     return (
-        <Form  {...layout} name="nest-messages" onFinish={onUpdateDemo} form={form}>
+        <Form  {...layout} name="nest-messages" onFinish={onUpdateDemo} >
             <Form.Item
                 name={[ 'userId']}
                 label=""
                 hidden={true}
             >
-                <Input value ={1} hidden/>
+                <input type="hidden" />
             </Form.Item>
             <Form.Item
                 name={['title']}
@@ -57,11 +54,11 @@ const UpdateForm =(props)=>{
                     },
                 ]}
             >
-                <Input  />
+                <input type="text" onChange={(e) =>setEnteredTitle(e.target.value)} value={enteredtitle}/>
             </Form.Item>
 
             <Form.Item name={['body']} label="Description">
-                <Input.TextArea rows={4} />
+                <input type="textarea" onChange={(e) =>setEnteredBody(e.target.value)} value={enteredBody}/>
             </Form.Item>
             <Form.Item
                 wrapperCol={{
