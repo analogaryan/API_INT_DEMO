@@ -7,6 +7,7 @@ const Table = ()=>{
     const [tableData,setTableData]=useState([])
     const [enteredtitle,setEnteredTitle]=useState("")
     const [enteredBody,setEnteredBody]=useState("")
+
     const [toggleModel,setToggleModel]=useState(false)
     const [editionModal,setEditionModal]=useState({booleanVal :false ,did : "",title:"",body:"" })
     useEffect(()=>{
@@ -57,7 +58,11 @@ const Table = ()=>{
                     <td>{item.id}</td>
                     <td>{truncateValue(item.title,20)}</td>
                     <td>{truncateValue(item.body,20) }</td>
-                <td><Button onClick={()=>    setEditionModal({booleanVal :true, did : item.id ,body: item.body,title: item.title})
+                <td><Button onClick={()=>
+                {
+                    setEditionModal({booleanVal :true, did : item.id ,body: item.body,title: item.title}) ;
+                    setEnteredTitle(item.title);
+                    setEnteredBody(item.body)}
                 }>Update</Button> <Button type={"primary"} onClick={()=>onDeletionDemo(item.id)}>Delete</Button></td>
 
 

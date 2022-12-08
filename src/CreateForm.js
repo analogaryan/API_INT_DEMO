@@ -50,7 +50,7 @@ const CreateForm =(props)=>{
       </Form.Item>
 
       <Form.Item name={['demo', 'body']} label="Description">
-          <Input.TextArea />
+          <Input.TextArea rows={4} />
       </Form.Item>
           <Form.Item
               wrapperCol={{

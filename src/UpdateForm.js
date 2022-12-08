@@ -19,7 +19,7 @@ const UpdateForm =(props)=>{
 
     },[])
 
-    const onCreateDemo = (values)=>{
+    const onUpdateDemo = (values)=>{
         console.log(values,"values")
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'POST',
@@ -36,7 +36,7 @@ const UpdateForm =(props)=>{
             .then((json) => props.setEditionModal(false));
     }
     return (
-        <Form  {...layout} name="nest-messages" onFinish={onCreateDemo} >
+        <Form  {...layout} name="nest-messages" onFinish={onUpdateDemo} >
             <Form.Item
                 name={[ 'userId']}
                 label=""
@@ -59,7 +59,7 @@ const UpdateForm =(props)=>{
             </Form.Item>
 
             <Form.Item name={['body']} label="Description">
-                <Input.TextArea  onChange = {(e)=>props.setEnteredBody(e.target.value)}defaultValue={props.body}/>
+                <Input.TextArea rows={4} onChange = {(e)=>props.setEnteredBody(e.target.value)}defaultValue={props.body}/>
             </Form.Item>
             <Form.Item
                 wrapperCol={{
