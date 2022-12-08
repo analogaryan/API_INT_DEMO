@@ -11,7 +11,6 @@ const layout = {
 const UpdateForm =(props)=>{
     const [enteredtitle,setEnteredTitle]=useState("")
     const [enteredBody,setEnteredBody]=useState("")
-    console.log(enteredBody,"enteredBody")
     useEffect(()=>{
         fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`)
             .then((response) => response.json())
@@ -23,25 +22,27 @@ const UpdateForm =(props)=>{
 
     },[props.id])
 
-    const onUpdateDemo = (values)=>{
-        console.log(values,"values")
-        fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'POST',
+    const onUpdateDemo = (e)=>{
+        e.preventDefault();
+        fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`, {
+            method: 'PUT',
             body: JSON.stringify({
-                title: values.demo.title,
-                body: values.demo.body,
-                userId: values.demo.userId,
+                id: props.id,
+                title: enteredtitle,
+                body: enteredBody,
+                userId: 1,
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
             .then((response) => response.json())
-            .then((json) => props.setEditionModal(false));
+            .then((json) => console.log(json));
+
     }
     return (
 
-        <form onFinish={onUpdateDemo}>
+        <form onSubmit={onUpdateDemo}>
             <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input type="text" className="form-control" onChange={(e) =>setEnteredTitle(e.target.value)} defaultValue={enteredtitle}/>
@@ -52,7 +53,7 @@ const UpdateForm =(props)=>{
                 <input type="textarea" className="form-control" rows={5} onChange={(e) =>setEnteredBody(e.target.value)} defaultValue={enteredBody}/>
             </div>
 
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">Update</button>
         </form>
     )
 }

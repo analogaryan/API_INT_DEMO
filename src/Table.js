@@ -68,7 +68,7 @@ const Table = ()=>{
             }>
                 <UpdateForm setEnteredBody={setEnteredBody}  setEnteredTitle = {setEnteredTitle} id={editionModal.did}  setEditionModal={setEditionModal} body={enteredBody} title={enteredtitle}/>
             </Modal>
-            <Button style={{alignItems :"right"}} onClick={()=>setToggleModel(true)}>new</Button>
+            <Button style={{left: "23%",margin: "10px"}} onClick={()=>setToggleModel(true)}>new</Button>
     <table id="table_design">
         <tr>
             <th>Id</th>

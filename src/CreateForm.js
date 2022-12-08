@@ -17,7 +17,7 @@ const CreateForm =(props)=>{
             body: JSON.stringify({
                 title: values.demo.title,
                 body: values.demo.body,
-                userId: values.demo.userId,
+                userId: 1,
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
