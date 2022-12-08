@@ -55,7 +55,7 @@ const Table = ()=>{
 
     return (
         <Fragment>
-            <Modal title="Create"  onOk={()=>setToggleModel(false)} onCancel={()=>setToggleModel(false)} open={toggleModel}  footer={
+            <Modal modalProps = {{destroyOnClose:true}}title="Create"  onOk={()=>setToggleModel(false)} onCancel={()=>setToggleModel(false)} open={toggleModel}  footer={
                 null
             }>
                <CreateForm setToggleModel={setToggleModel}/>

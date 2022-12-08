@@ -10,11 +10,14 @@ const layout = {
 };
 const UpdateForm =(props)=>{
 
-
+    const [form] = Form.useForm();
     useEffect(()=>{
     fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`)
         .then((response) => response.json())
-        .then((json) => console.log(json,"json") );
+        .then((json) => form.getFieldsValue({
+            body: json.body,
+            title: json.title,
+        }) );
 
 
     },[])
@@ -36,12 +39,11 @@ const UpdateForm =(props)=>{
             .then((json) => props.setEditionModal(false));
     }
     return (
-        <Form  {...layout} name="nest-messages" onFinish={onUpdateDemo} >
+        <Form  {...layout} name="nest-messages" onFinish={onUpdateDemo} form={form}>
             <Form.Item
                 name={[ 'userId']}
                 label=""
                 hidden={true}
-
             >
                 <Input value ={1} hidden/>
             </Form.Item>
@@ -55,11 +57,11 @@ const UpdateForm =(props)=>{
                     },
                 ]}
             >
-                <Input onChange = {(e)=>props.setEnteredTitle(e.target.value)} defaultValue={props.title} />
+                <Input  />
             </Form.Item>
 
             <Form.Item name={['body']} label="Description">
-                <Input.TextArea rows={4} onChange = {(e)=>props.setEnteredBody(e.target.value)}defaultValue={props.body}/>
+                <Input.TextArea rows={4} />
             </Form.Item>
             <Form.Item
                 wrapperCol={{
