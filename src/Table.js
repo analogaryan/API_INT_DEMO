@@ -74,13 +74,16 @@ const Table = ()=>{
             </Modal>
             <Button style={{left: "23%",margin: "10px"}} onClick={()=>setToggleModel(true)}>new</Button>
     <table id="table_design">
+        <thead>
         <tr>
             <th>Id</th>
             <th>Title</th>
-            <th>Body</th>
+            <th>Description</th>
             <th>Actions</th>
 
         </tr>
+        </thead>
+        <tbody>
             {tableData.map((item,index)=>{
             return    <tr key={index}
                           onDragStart={(e) => dragStart(e, index)}
@@ -89,8 +92,8 @@ const Table = ()=>{
                           key={index}
                           draggable>
                     <td>{item.id}</td>
-                    <td><a onClick={()=>setShowDrawer(true)}>{truncateValue(item.title,20)}</a></td>
-                    <td>{truncateValue(item.body,20) }</td>
+                    <td><a style={{color:"#0909b1",cursor:"pointer"}} onClick={()=>{setViewData(item);setShowDrawer(true)}}>{truncateValue(item.title,30)}</a></td>
+                    <td>{truncateValue(item.body,30) }</td>
                 <td><Button  style={{marginLeft:"10px"}} onClick={()=>
                 {
                     setEditionModal({booleanVal :true, did : item.id ,body: item.body,title: item.title}) ;
@@ -99,11 +102,14 @@ const Table = ()=>{
                 }
                 }
                 >Update</Button>
-                    <Button style={{marginLeft:"10px"}} onClick={()=>onDeletionDemo(item.id)}>Delete</Button>
-                    <Button  style={{marginLeft:"10px"}} type="primary" onClick={()=>{setViewData(item);setShowDrawer(true)}}>view</Button></td>
+                    <Button style={{marginLeft:"10px"}} type="primary" onClick={()=>onDeletionDemo(item.id)}>Delete</Button>
+                    {/*<Button  style={{marginLeft:"10px"}}  onClick={()=>{setViewData(item);setShowDrawer(true)}}>view</Button>*/}
+                </td>
 
             </tr>
+
             })}
+        </tbody>
     </table>
         </Fragment>)
 }
