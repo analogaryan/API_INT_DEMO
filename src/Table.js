@@ -1,9 +1,11 @@
-import React, {Fragment, useEffect, useState} from "react"
+import React, {Fragment,useRef, useEffect, useState} from "react"
 import "./table.css"
 import {Button, Modal} from 'antd';
 import CreateForm from "./CreateForm";
 import UpdateForm from "./UpdateForm";
 const Table = ()=>{
+    const dragItem = useRef();
+    const dragOverItem = useRef();
     const [tableData,setTableData]=useState([])
     const [enteredtitle,setEnteredTitle]=useState("")
     const [enteredBody,setEnteredBody]=useState("")
@@ -30,6 +32,25 @@ const Table = ()=>{
             method: 'DELETE',
         });
     }
+    const dragStart = (e, position) => {
+        dragItem.current = position;
+        console.log(e.target.innerHTML);
+    };
+
+    const dragEnter = (e, position) => {
+        dragOverItem.current = position;
+        console.log(e.target.innerHTML);
+    };
+
+    const drop = (e) => {
+        const copyListItems = [...tableData];
+        const dragItemContent = copyListItems[dragItem.current];
+        copyListItems.splice(dragItem.current, 1);
+        copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+        dragItem.current = null;
+        dragOverItem.current = null;
+        setTableData(copyListItems);
+    };
 
 
     return (
@@ -54,7 +75,12 @@ const Table = ()=>{
 
         </tr>
             {tableData.map((item,index)=>{
-            return    <tr key={index}>
+            return    <tr key={index}
+                          onDragStart={(e) => dragStart(e, index)}
+                          onDragEnter={(e) => dragEnter(e, index)}
+                          onDragEnd={drop}
+                          key={index}
+                          draggable>
                     <td>{item.id}</td>
                     <td>{truncateValue(item.title,20)}</td>
                     <td>{truncateValue(item.body,20) }</td>
