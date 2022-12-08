@@ -26,25 +26,13 @@ const Table = ()=>{
     const truncateValue=(string,newString)=>{
         return string?.length > newString ? string.substr(0,newString-1) + "..." :string
     }
-    const onCreateDemo = ()=>{
-        fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'POST',
-            body: JSON.stringify({
-                title: 'foo',
-                body: 'bar',
-                userId: 1,
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json())
-            .then((json) => console.log(json));
-    }
+
     return (
         <Fragment>
-            <Modal title="Basic Modal" open={toggleModel} onOk={handleOk} onCancel={handleCancel}>
-               <CreateForm onCreateDemo={onCreateDemo}/>
+            <Modal title="Basic Modal" open={toggleModel} onOk={handleOk} onCancel={handleCancel} footer={
+                null
+            }>
+               <CreateForm/>
             </Modal>
             <Button style={{alignItems :"right"}} onClick={()=>setToggleModel(true)}>new</Button>
     <table id="table_design">
