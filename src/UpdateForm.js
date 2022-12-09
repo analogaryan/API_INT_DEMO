@@ -44,12 +44,12 @@ const UpdateForm =(props)=>{
 
         <form onSubmit={onUpdateDemo}>
             <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Email address</label>
+                <label htmlFor="exampleInputEmail1">Title</label>
                 <input type="text" className="form-control" onChange={(e) =>setEnteredTitle(e.target.value)} defaultValue={enteredtitle}/>
 
             </div>
             <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
+                <label htmlFor="exampleInputPassword1">Description</label>
                 <input type="textarea" className="form-control" rows={5} onChange={(e) =>setEnteredBody(e.target.value)} defaultValue={enteredBody}/>
             </div>
 

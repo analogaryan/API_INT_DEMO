@@ -92,7 +92,7 @@ const Table = ()=>{
                           key={index}
                           draggable>
                     <td>{item.id}</td>
-                    <td><a style={{color:"#0909b1",cursor:"pointer"}} onClick={()=>{setViewData(item);setShowDrawer(true)}}>{truncateValue(item.title,30)}</a></td>
+                    <td><a style={{color:"rgb(29 125 241)",cursor:"pointer"}} onClick={()=>{setViewData(item);setShowDrawer(true)}}>{truncateValue(item.title,30)}</a></td>
                     <td>{truncateValue(item.body,30) }</td>
                 <td><Button  style={{marginLeft:"10px"}} onClick={()=>
                 {
